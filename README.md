@@ -26,7 +26,9 @@ O Docker subirá dois containeres: Um para o banco de dados Postgres e outro com
 O banco de dados estará de pé e alimentado automaticamente dentro de alguns segundos após a finalização do comando. Ele estará disponível para acesso na porta `5432` com as credenciais que estão no arquivo `.env`.
 
 ### Sem docker (não recomendado)
-Considerando que você tenha uma instância Postgres em execução e com um usuário e banco de dados criado para o projeto, exporte as seguintes variáveis no seu shell:
+Considerando que você tenha uma instância Postgres em execução e com um usuário e banco de dados criado para o projeto, aplique o arquivo `src/dw_tables.sql` para criação das tabelas necessárias para armazenar os dados. 
+
+Em seguida exporte as seguintes variáveis no seu shell:
 ```shell
 export POSTGRES_USER=<usuario do banco>
 export POSTGRES_PASSWORD=<senha do usuario>
