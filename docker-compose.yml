@@ -1,8 +1,23 @@
 version: "3.1"
 services:
-  postgres_dw:
-    image: postgres
+  postgres:
     build:
       context: "./"
+      dockerfile: "docker/postgres/Dockerfile"
+      args:
+        postgres_user: ${POSTGRES_USER}
+        postgres_password: ${POSTGRES_PASSWORD}
+        postgres_db: ${POSTGRES_DB}
     ports:
       - 5432:5432
+  etl:
+    build:
+      context: "./"
+      dockerfile: "./docker/etl/Dockerfile"
+      args:
+        postgres_user: ${POSTGRES_USER}
+        postgres_password: ${POSTGRES_PASSWORD}
+        postgres_db: ${POSTGRES_DB}
+    depends_on:
+      - postgres
+    command: ["./wait-for-it.sh", "postgres_dw:5432", "--", "python", "etl.py"]
