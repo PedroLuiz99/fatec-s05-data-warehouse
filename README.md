@@ -10,8 +10,6 @@ Caso não deseje utilizar o Docker (o que eu não recomendo), é necessário ins
 * PostgreSQL Server 13
 * Python 3.6 ou superior
 * Pip
-* psycopg2 → `pip install psycopg2` ou `pip install psycopg2-binary`
-* pygrametl → `pip install pygrametl`
 
 ## Executando o projeto
 ### Via Docker
@@ -28,13 +26,41 @@ O banco de dados estará de pé e alimentado automaticamente dentro de alguns se
 ### Sem docker (não recomendado)
 Considerando que você tenha uma instância Postgres em execução e com um usuário e banco de dados criado para o projeto, aplique o arquivo `src/dw_tables.sql` para criação das tabelas necessárias para armazenar os dados. 
 
+Dentro da pasta do projeto crie um Virtual Environment com o seguinte comando:
+```shell
+python -m venv venv
+```
+
+Para ativar o Venv no seu shell:
+```shell
+# Bash:
+source venv/bin/activate
+
+# Powershell:
+.\venv\Scripts\Activate.ps1
+```
+
+Para instalar as dependências Python utilize o seguinte comando:
+```shell
+pip install -r requirements.txt
+```
+
+
 Em seguida exporte as seguintes variáveis no seu shell:
 ```shell
+# Bash
 export POSTGRES_USER=<usuario do banco>
 export POSTGRES_PASSWORD=<senha do usuario>
 export POSTGRES_DB=<nome do banco>
 export POSTGRES_HOST=<host do banco - se estiver na sua máquina utilize localhost>
 export POSTGRES_PORT=<porta do banco, por padrão 5432>
+
+# Powershell
+$env:POSTGRES_USER='<usuario do banco>'
+$env:POSTGRES_PASSWORD='<senha do usuario>'
+$env:POSTGRES_DB='<nome do banco>'
+$env:POSTGRES_HOST='<host do banco - se estiver na sua máquina utilize localhost>'
+$env:POSTGRES_PORT='<porta do banco, por padrão 5432>'
 ```
 
 Após isso entre na pasta `src` com o comando:
